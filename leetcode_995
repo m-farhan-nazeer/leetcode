@@ -1,0 +1,23 @@
+class Solution(object):
+    def minDeletionSize(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: int
+        """
+        i = 0 
+        j = 0 
+        deli = 0 
+        length_index = len(strs[1])
+        while i <= len(strs)-2:
+            if j >= length_index:
+                return deli 
+            if ord(strs[i][j]) < ord(strs[i+1][j]):
+                i+=1
+            elif  (ord(strs[i][j]) == ord(strs[i+1][j])):
+                j+=1
+            else :
+                deli += 1
+                j+= 1
+                i = 0
+        return deli 
+        
