@@ -1,23 +1,27 @@
 class Solution(object):
     def minDeletionSize(self, strs):
-        """
-        :type strs: List[str]
-        :rtype: int
-        """
-        i = 0 
-        j = 0 
-        deli = 0 
-        length_index = len(strs[1])
-        while i <= len(strs)-2:
-            if j >= length_index:
-                return deli 
-            if ord(strs[i][j]) < ord(strs[i+1][j]):
-                i+=1
-            elif  (ord(strs[i][j]) == ord(strs[i+1][j])):
-                j+=1
-            else :
-                deli += 1
-                j+= 1
-                i = 0
-        return deli 
+        n = len(strs)
+        m = len(strs[0])
         
+        # sorted_pair[i] = True means strs[i] < strs[i+1] is already decided
+        sorted_pair = [False] * (n - 1)
+        deletions = 0
+        
+        for col in range(m):
+            # Step 1: Check if this column is invalid
+            bad = False
+            for i in range(n - 1):
+                if not sorted_pair[i] and strs[i][col] > strs[i + 1][col]:
+                    bad = True
+                    break
+            
+            if bad:
+                deletions += 1
+                continue
+            
+            # Step 2: Update sorted pairs
+            for i in range(n - 1):
+                if not sorted_pair[i] and strs[i][col] < strs[i + 1][col]:
+                    sorted_pair[i] = True
+        
+        return deletions
