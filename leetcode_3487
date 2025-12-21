@@ -1,5 +1,6 @@
 class Solution(object):
     def maxSum(self, nums):
+        #made a set ,made maxi to store maximum number to display in case of negative numbers 
         subarray = set()
         poz = False 
         maxi =  float('-inf')
@@ -9,6 +10,8 @@ class Solution(object):
             if nums[i] > maxi :
                 maxi = nums[i]
             subarray.add(nums[i])  
+
+        #if all positive handled normallY
         if poz:
             x = 0
             for val in subarray:      
@@ -16,5 +19,7 @@ class Solution(object):
                     x += val
             
             return x
+        #if all negative just return negative maximum
+        
         return maxi
        
