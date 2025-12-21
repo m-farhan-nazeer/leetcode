@@ -1,0 +1,20 @@
+class Solution(object):
+    def maxSum(self, nums):
+        subarray = set()
+        poz = False 
+        maxi =  float('-inf')
+        for i in range(len(nums)):
+            if nums[i]>=0:
+                poz = True 
+            if nums[i] > maxi :
+                maxi = nums[i]
+            subarray.add(nums[i])  
+        if poz:
+            x = 0
+            for val in subarray:      
+                if val > 0  :
+                    x += val
+            
+            return x
+        return maxi
+       
