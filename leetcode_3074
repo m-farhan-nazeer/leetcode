@@ -1,0 +1,22 @@
+class Solution(object):
+    def minimumBoxes(self, apple, capacity):
+        """
+        :type apple: List[int]
+        :type capacity: List[int]
+        :rtype: int
+        """
+        total_apples = 0
+        for apples in apple:
+            total_apples += apples
+        capacity.sort(reverse=True)
+
+        used = 0
+        for items in capacity :
+            if total_apples <= 0:
+                return used 
+            used += 1
+            total_apples -= items
+        return used
+
+
+        
