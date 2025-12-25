@@ -1,0 +1,18 @@
+class Solution(object):
+    def maximumHappinessSum(self, happiness, k):
+        """
+        :type happiness: List[int]
+        :type k: int
+        :rtype: int
+        """
+        happiness.sort(reverse=True)
+        selected = 0 
+        for i in range(len(happiness)) :
+            hap = happiness[i]-i
+            if hap >0 and k >0:
+                k -= 1
+                selected += hap
+        return selected
+
+
+        
