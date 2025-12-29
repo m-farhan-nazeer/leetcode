@@ -1,0 +1,31 @@
+class Solution(object):
+    def pyramidTransition(self, bottom, allowed):
+        from collections import defaultdict
+
+        # Step 1: build rules map
+        rules = defaultdict(list)
+        for p in allowed:
+            rules[p[:2]].append(p[2])
+
+        # Step 2: DFS
+        def dfs(row):
+            if len(row) == 1:
+                return True
+
+            # generate all possible next rows
+            def build_next(i, path):
+                if i == len(row) - 1:
+                    return dfs(path)
+
+                pair = row[i:i+2]
+                if pair not in rules:
+                    return False
+
+                for ch in rules[pair]:
+                    if build_next(i + 1, path + ch):
+                        return True
+                return False
+
+            return build_next(0, "")
+
+        return dfs(bottom)
